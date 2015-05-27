@@ -3,4 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="total_to_split">Enter The Total Amount Of Money You Wish To Be Split: </string>
+    <string name="n_shares">And What Factor Do You Want To Divide The Money By: </string>
+    <string name="split_now">Split Now</string>
 </resources>
