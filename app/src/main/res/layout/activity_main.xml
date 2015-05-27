@@ -14,10 +14,13 @@
     <EditText android:id="@+id/n_shares"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="numberSigned"
         android:hint="@string/n_shares"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/split_now" />
+        android:text="@string/split_now"
+        android:inputType="numberSigned"
+        android:onClick="continueToSplit"/>
 
 </RelativeLayout>

@@ -1,9 +1,12 @@
 package com.traviswu.payme;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -34,5 +37,12 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void continueToSplit(View view){
+        Intent newIntent = new Intent (this, ContinueToSplit.class);
+        EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
+        EditText nShares = (EditText) findViewById(R.id.n_shares);
+
     }
 }
