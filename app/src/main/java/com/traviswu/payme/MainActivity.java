@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
+    public static final String MONEY_PER_SLICE = "com.traviswu.payme.money_per_slice";
+    public static final String N_SHARES ="com.traviswu.payme.n_shares";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class MainActivity extends ActionBarActivity {
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
         EditText nShares = (EditText) findViewById(R.id.n_shares);
         double slices = Integer.parseInt(totalAmount.getText().toString())/Integer.parseInt(nShares.getText().toString());
-        
+
+        newIntent.putExtra(MONEY_PER_SLICE, slices);
+        newIntent.putExtra(N_SHARES, Double.parseDouble(nShares.getText().toString()));
+        startActivity(newIntent);
     }
 }
