@@ -6,4 +6,5 @@
     <string name="total_to_split">Enter The Total Amount Of Money You Wish To Be Split: </string>
     <string name="n_shares">And What Factor Do You Want To Divide The Money By: </string>
     <string name="split_now">Split Now</string>
+    <string name="title_activity_continue_to_split">ContinueToSplit</string>
 </resources>

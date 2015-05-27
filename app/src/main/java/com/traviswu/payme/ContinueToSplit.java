@@ -1,26 +1,23 @@
 package com.traviswu.payme;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class ContinueToSplit extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_continue_to_split);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_continue_to_split, menu);
         return true;
     }
 
@@ -37,13 +34,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void continueToSplit(View view){
-        Intent newIntent = new Intent (this, ContinueToSplit.class);
-        EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
-        EditText nShares = (EditText) findViewById(R.id.n_shares);
-        double slices = Integer.parseInt(totalAmount.getText().toString())/Integer.parseInt(nShares.getText().toString());
-        
     }
 }
