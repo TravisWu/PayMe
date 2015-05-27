@@ -1,9 +1,11 @@
 package com.traviswu.payme;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class ContinueToSplit extends ActionBarActivity {
@@ -11,7 +13,15 @@ public class ContinueToSplit extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_continue_to_split);
+        Intent newIntent = getIntent();
+        double money_per_slice = newIntent.getDoubleExtra(MainActivity.MONEY_PER_SLICE, 0.0);
+        int n_slices = newIntent.getIntExtra(MainActivity.N_SHARES, 0);
+
+        TextView newTextView = new TextView(this);
+        newTextView.setTextSize(40);
+        String newMessage = "Each share is $" + money_per_slice+ " . Can distribute up to " + n_slices + " shares.";
+        newTextView.setText(newMessage);
+
     }
 
     @Override
