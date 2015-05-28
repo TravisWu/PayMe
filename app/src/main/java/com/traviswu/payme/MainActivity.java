@@ -50,4 +50,5 @@ public class MainActivity extends ActionBarActivity {
         newIntent.putExtra(N_PEOPLE, Double.parseDouble(nPeople.getText().toString()));
         startActivity(newIntent);
     }
+
 }

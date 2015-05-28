@@ -23,11 +23,13 @@ public class ContinueToSplit extends ActionBarActivity {
         total_amount = newIntent.getDoubleExtra(MainActivity.TOTAL_AMOUNT, 0.0);
         n_people = newIntent.getIntExtra(MainActivity.N_PEOPLE, 0);
 
+
         TextView newTextView = new TextView(this);
         newTextView.setTextSize(40);
-        String newMessage = "Spliting $" + total_amount + " between " + n_people + " people.";
+        String newMessage = "Total money $"+ total_amount+" between " +n_people+ " people.";
         newTextView.setText(newMessage);
         setContentView(newTextView);
+
         /**
         EditText[] people_list = new EditText[n_people];
         for (int i=0; i < n_people; i++){
