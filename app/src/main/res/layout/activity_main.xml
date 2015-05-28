@@ -10,17 +10,23 @@
     <EditText android:id="@+id/amount_to_split"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="numberSigned"
         android:hint="@string/total_to_split"/>
-    <EditText android:id="@+id/n_shares"
+    <EditText android:id="@+id/n_people"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned"
-        android:hint="@string/n_shares"/>
+        android:hint="@string/n_people"
+        android:layout_below="@+id/amount_to_split"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/split_now"
-        android:inputType="numberSigned"
-        android:onClick="continueToSplit"/>
+        android:onClick="continueToSplit"
+        android:layout_gravity="center"
+        android:layout_below="@+id/n_people"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -5,22 +5,34 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class ContinueToSplit extends ActionBarActivity {
+    double total_amount;
+    int n_people;
+    int[] shares = new int [n_people];
+    double[] subtotal = new double [n_people];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent newIntent = getIntent();
-        double money_per_slice = newIntent.getDoubleExtra(MainActivity.MONEY_PER_SLICE, 0.0);
-        int n_slices = newIntent.getIntExtra(MainActivity.N_SHARES, 0);
+        total_amount = newIntent.getDoubleExtra(MainActivity.TOTAL_AMOUNT, 0.0);
+        n_people = newIntent.getIntExtra(MainActivity.N_PEOPLE, 0);
 
-        TextView newTextView = new TextView(this);
+        TextView newTextView = (TextView)findViewById(R.id.split_instruction);
         newTextView.setTextSize(40);
-        String newMessage = "Each share is $" + money_per_slice+ " . Can distribute up to " + n_slices + " shares.";
+        String newMessage = "Spliting $" + total_amount + " between " + n_people + " people.";
         newTextView.setText(newMessage);
+
+        EditText[] people_list = new EditText[n_people];
+        for (int i=0; i < n_people; i++){
+            people_list[i].setTextSize(40);
+            people_list[i].setText(shares[i]+"");
+        }
 
     }
 
@@ -44,5 +56,16 @@ public class ContinueToSplit extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //This method will change everyone share to be evenly distributed.
+    //It will not direct user to Checkout menu
+    //It can serve as a mid-point where users to choose to go to different variations from there
+    public void evenSplit(View view){
+        double shares = total_amount/n_people;
+        for (int i=0; i<n_people; i++){
+            this.shares[i]=1;
+            subtotal[i]=shares;
+        }
     }
 }
