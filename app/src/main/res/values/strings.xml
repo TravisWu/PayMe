@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">PayMe</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="total_to_split">Enter The Total Amount Of Money You Wish To Be Split: </string>
+    <string name="n_people">And How Many People Are Sharing The Burden: </string>
+    <string name="split_now">Split Now</string>
+    <string name="title_activity_continue_to_split">ContinueToSplit</string>
+    <string name="even_split">Split Evenly</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
 </resources>
