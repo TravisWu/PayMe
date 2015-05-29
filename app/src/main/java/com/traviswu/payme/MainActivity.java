@@ -46,8 +46,8 @@ public class MainActivity extends ActionBarActivity {
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
         EditText nPeople = (EditText) findViewById(R.id.n_people);
 
-        newIntent.putExtra(TOTAL_AMOUNT, Integer.parseInt(totalAmount.getText().toString()));
-        newIntent.putExtra(N_PEOPLE, Double.parseDouble(nPeople.getText().toString()));
+        newIntent.putExtra(TOTAL_AMOUNT, Double.parseDouble(totalAmount.getText().toString()));
+        newIntent.putExtra(N_PEOPLE, Integer.parseInt(nPeople.getText().toString()));
         startActivity(newIntent);
     }
 
