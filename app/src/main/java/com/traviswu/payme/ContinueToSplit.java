@@ -64,6 +64,7 @@ public class ContinueToSplit extends ActionBarActivity {
     //This method will change everyone share to be evenly distributed.
     //It will not direct user to Checkout menu
     //It can serve as a mid-point where users to choose to go to different variations from there
+    /**
     public void evenSplit(View view){
         double shares = total_amount/n_people;
         for (int i=0; i<n_people; i++){
@@ -71,4 +72,5 @@ public class ContinueToSplit extends ActionBarActivity {
             subtotal[i]=shares;
         }
     }
+     **/
 }
