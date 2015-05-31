@@ -66,8 +66,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/bid"
         android:layout_below="@+id/imageView4"
         android:layout_alignParentLeft="true"
