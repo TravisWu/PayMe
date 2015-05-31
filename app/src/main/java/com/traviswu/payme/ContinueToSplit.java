@@ -19,8 +19,8 @@ public class ContinueToSplit extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent newIntent = getIntent();
-        total_amount = newIntent.getDoubleExtra(MainActivity.TOTAL_AMOUNT, 0.0);
-        n_people = newIntent.getIntExtra(MainActivity.N_PEOPLE, 0);
+        total_amount = newIntent.getDoubleExtra(SharkSplit.TOTAL_AMOUNT, 0.0);
+        n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 0);
 
 
         TextView newTextView = new TextView(this);
@@ -29,13 +29,36 @@ public class ContinueToSplit extends ActionBarActivity {
         newTextView.setText(newMessage);
         setContentView(newTextView);
 
-        /**
-        EditText[] people_list = new EditText[n_people];
-        for (int i=0; i < n_people; i++){
-            people_list[i].setTextSize(40);
-            people_list[i].setText(shares[i]+"");
-        }
-         **/
+
+//        final EditText[] people_list = new EditText[n_people];
+//        final TextView[] people_each_own = new TextView[n_people];
+//        for (int i=0; i < n_people; i++){
+//            people_list[i].setTextSize(40);
+//            people_list[i].setText(shares[i] + "");
+//            people_list[i].addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//                    int number = Integer.parseInt(s.toString());
+//                    people_list[i] = number;
+//                }
+//            });
+//
+//            people_each_own[i].setTextSize(40);
+//            people_each_own[i].setText(subtotal[i] + "");
+//
+//            setContentView(people_list[i]);
+//            setContentView(people_each_own[i]);
+//        }
 
     }
 
@@ -64,7 +87,7 @@ public class ContinueToSplit extends ActionBarActivity {
     //This method will change everyone share to be evenly distributed.
     //It will not direct user to Checkout menu
     //It can serve as a mid-point where users to choose to go to different variations from there
-    /**
+
     public void evenSplit(View view){
         double shares = total_amount/n_people;
         for (int i=0; i<n_people; i++){
@@ -72,5 +95,20 @@ public class ContinueToSplit extends ActionBarActivity {
             subtotal[i]=shares;
         }
     }
-     **/
+
+//    public void checkOut(View view){
+//        Intent newIntent = new Intent (ContinueToSplit.class,ProceedToCheckout.class);
+//
+//        int total_share = 0;
+//        for (int i =0; i<n_people; i++){
+//            total_share += shares[i];
+//        }
+//
+//        double money_per_share = total_amount/total_share;
+//        for (int i =0; i<n_people; i++){
+//            subtotal[i] = shares[i]*money_per_share;
+//        }
+//
+//
+//    }
 }
