@@ -3,12 +3,9 @@ package com.traviswu.payme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -33,35 +30,35 @@ public class ContinueToSplit extends ActionBarActivity {
         setContentView(newTextView);
 
 
-        final EditText[] people_list = new EditText[n_people];
-        final TextView[] people_each_own = new TextView[n_people];
-        for (int i=0; i < n_people; i++){
-            people_list[i].setTextSize(40);
-            people_list[i].setText(shares[i] + "");
-            people_list[i].addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    int number = Integer.parseInt(s.toString());
-                    people_list[i] = number;
-                }
-            });
-
-            people_each_own[i].setTextSize(40);
-            people_each_own[i].setText(subtotal[i] + "");
-
-            setContentView(people_list[i]);
-            setContentView(people_each_own[i]);
-        }
+//        final EditText[] people_list = new EditText[n_people];
+//        final TextView[] people_each_own = new TextView[n_people];
+//        for (int i=0; i < n_people; i++){
+//            people_list[i].setTextSize(40);
+//            people_list[i].setText(shares[i] + "");
+//            people_list[i].addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//                    int number = Integer.parseInt(s.toString());
+//                    people_list[i] = number;
+//                }
+//            });
+//
+//            people_each_own[i].setTextSize(40);
+//            people_each_own[i].setText(subtotal[i] + "");
+//
+//            setContentView(people_list[i]);
+//            setContentView(people_each_own[i]);
+//        }
 
     }
 
@@ -99,19 +96,19 @@ public class ContinueToSplit extends ActionBarActivity {
         }
     }
 
-    public void checkOut(View view){
-        Intent newIntent = new Intent (ContinueToSplit.class,ProceedToCheckout.class);
-
-        int total_share = 0;
-        for (int i =0; i<n_people; i++){
-            total_share += shares[i];
-        }
-
-        double money_per_share = total_amount/total_share;
-        for (int i =0; i<n_people; i++){
-            subtotal[i] = shares[i]*money_per_share;
-        }
-
-
-    }
+//    public void checkOut(View view){
+//        Intent newIntent = new Intent (ContinueToSplit.class,ProceedToCheckout.class);
+//
+//        int total_share = 0;
+//        for (int i =0; i<n_people; i++){
+//            total_share += shares[i];
+//        }
+//
+//        double money_per_share = total_amount/total_share;
+//        for (int i =0; i<n_people; i++){
+//            subtotal[i] = shares[i]*money_per_share;
+//        }
+//
+//
+//    }
 }
