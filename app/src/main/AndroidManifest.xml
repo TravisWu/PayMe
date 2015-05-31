@@ -20,19 +20,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SharkSplit"
-            android:label="@string/app_name" >
+            android:name=".MainActivity"
+            android:label="LoanShark"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
 
-           </activity>
+        </activity>
         <activity
-            android:name=".ContinueToSplit"
+            android:name=".SharkSplit"
             android:label="@string/title_activity_continue_to_split"
-            android:parentActivityName=".SharkSplit" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:parentActivityName=".MainActivity" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.traviswu.payme.SharkSplit" />
