@@ -20,7 +20,7 @@ public class ContinueToSplit extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Intent newIntent = getIntent();
         total_amount = newIntent.getDoubleExtra(SharkSplit.TOTAL_AMOUNT, 0.0);
-        n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 0);
+        n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
 
 
         TextView newTextView = new TextView(this);
