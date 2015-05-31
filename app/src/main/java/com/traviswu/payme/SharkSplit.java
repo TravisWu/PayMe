@@ -42,7 +42,7 @@ public class SharkSplit extends ActionBarActivity {
     }
 
     public void continueToSplit(View view){
-        Intent newIntent = new Intent (this, ContinueToSplit.class);
+        Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
         EditText nPeople = (EditText) findViewById(R.id.n_people);
 

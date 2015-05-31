@@ -3,9 +3,11 @@ package com.traviswu.payme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -54,7 +56,6 @@ public class ContinueToSplit extends ActionBarActivity {
 //
 //            people_each_own[i].setTextSize(40);
 //            people_each_own[i].setText(subtotal[i] + "");
-//
 //            setContentView(people_list[i]);
 //            setContentView(people_each_own[i]);
 //        }

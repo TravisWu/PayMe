@@ -35,6 +35,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.traviswu.payme.SharkSplit" />
         </activity>
+        <activity
+            android:name=".ContinueToSplit"
+            android:label="Spliting Display"
+            android:parentActivityName=".SharkSplit">
+        </activity>
+
+
     </application>
 
 </manifest>
