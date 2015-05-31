@@ -1,47 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#C9F1FD"
-    android:id="@+id/still"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.traviswu.payme.ContinueToSplit"
+    android:background="#C9F1FD">
 
-    <ImageView
-        android:layout_width="314dp"
-        android:layout_height="253dp"
-        android:id="@+id/imageView2"
-        android:src="@drawable/sharkvert"
-        android:layout_marginBottom="200dp"
-        android:layout_marginLeft="30dp" />
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/sharkvert"
+    android:id="@+id/imageView4"
+    android:scaleType="fitCenter"
+    android:layout_alignParentTop="true" />
+    <!--<Button-->
+        <!--android:id="@+id/angry_btn"-->
 
+        <!--android:text="Shark Split"-->
+        <!--android:textColor="#030505"-->
+        <!--android:textSize="30sp"-->
+        <!--android:layout_gravity="center"-->
+
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/mybuttonshape" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/angry_btn2"-->
+
+        <!--android:text="draw blood"-->
+        <!--android:textColor="#030505"-->
+        <!--android:textSize="30sp"-->
+        <!--android:layout_gravity="center"-->
+
+        <!--android:layout_width="270dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:background="@drawable/mybuttonshape" />-->
+<!--*/-->
     <Button
-        android:id="@+id/angry_btn"
-
-        android:text="Shark Split"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sharkSplit"
         android:textColor="#030505"
         android:textSize="30sp"
-        android:layout_gravity="center"
+        android:id="@+id/sharkSplit"
 
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mybuttonshape" />
+        android:background="@drawable/mybuttonshape"
+        android:layout_above="@+id/buttonBlood"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="56dp" />
 
     <Button
-        android:id="@+id/angry_btn2"
-
-        android:text="draw blood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonBlood"
         android:textColor="#030505"
         android:textSize="30sp"
-        android:layout_gravity="center"
+        android:id="@+id/buttonBlood"
 
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:background="@drawable/mybuttonshape" />
+        android:background="@drawable/mybuttonshape"
+        android:layout_marginBottom="63dp"
+        android:layout_above="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/bid" />
+        android:layout_width="100"
+        android:layout_height="30dp"
+        android:src="@drawable/bid"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/imageView5" />
 
-</LinearLayout>
+</RelativeLayout>
