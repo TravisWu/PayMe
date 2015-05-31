@@ -6,6 +6,6 @@
     <string name="n_people">And How Many People Are Sharing The Burden: </string>
     <string name="split_now">Split Now</string>
     <string name="title_activity_continue_to_split">ContinueToSplit</string>
-    <string name="even_split">Split Evenly</string>
-    <string name="proceed_to_checkout">Proceed to Checkout</string>
+    <string name="sharkSplit">Shark Split</string>
+    <string name="buttonBlood">Draw Blood</string>
 </resources>
