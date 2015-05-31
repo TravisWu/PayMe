@@ -23,7 +23,7 @@ public class ContinueToSplit extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Intent newIntent = getIntent();
         total_amount = newIntent.getDoubleExtra(SharkSplit.TOTAL_AMOUNT, 0.0);
-        n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 0);
+        n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
 
 
         TextView newTextView = new TextView(this);
@@ -35,7 +35,7 @@ public class ContinueToSplit extends ActionBarActivity {
 
         final EditText[] people_list = new EditText[n_people];
         final TextView[] people_each_own = new TextView[n_people];
-        for (int i=0; i < n_people; i++){
+        for (int i=0; i < n_people; i++) {
             people_list[i].setTextSize(40);
             people_list[i].setText(shares[i] + "");
             people_list[i].addTextChangedListener(new TextWatcher() {
@@ -55,6 +55,7 @@ public class ContinueToSplit extends ActionBarActivity {
                     people_list[i] = number;
                 }
             });
+
 
             people_each_own[i].setTextSize(40);
             people_each_own[i].setText(subtotal[i] + "");
