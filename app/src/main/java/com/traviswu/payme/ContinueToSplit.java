@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -31,35 +34,32 @@ public class ContinueToSplit extends ActionBarActivity {
         newTextView.setText(newMessage);
         setContentView(newTextView);
 
-//        final EditText[] people_list = new EditText[n_people];
-//        final TextView[] people_each_own = new TextView[n_people];
-//        for (int i=0; i < n_people; i++){
-//            people_list[i].setTextSize(40);
-//            people_list[i].setText(shares[i] + "");
-//            people_list[i].addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                }
-//
-//                @Override
-//                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                }
-//
-//                @Override
-//                public void afterTextChanged(Editable s) {
-//                    int number = Integer.parseInt(s.toString());
-//                    people_list[i] = number;
-//                }
-//            });
-//
-//            people_each_own[i].setTextSize(40);
-//            people_each_own[i].setText(subtotal[i] + "");
-//            setContentView(people_list[i]);
-//            setContentView(people_each_own[i]);
-//        }
 
+        for (int i=0; i<shares.length; i++){
+            shares[i] = 0;
+            subtotal[i] = 0;
+            System.out.println(i + "++++" + n_people);
+        }
+
+        TableLayout myTable = (TableLayout)findViewById(R.id.table_of_shares);
+        TableRow [] rows = new TableRow[n_people];
+        //TextView [] shares = new TextView[n_people];
+        for (int j=0; j<shares.length; j++){
+            rows[j]= new TableRow(this);
+            rows[j].setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+            try{
+                TextView tv = new TextView(this);
+                tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+                tv.setTextSize(40);
+                tv.setText("this person has " + shares[j] +" shares out of the total");
+                rows[j].addView(tv);
+            }
+            catch (Exception ex) {
+                System.out.println(ex);
+            }
+            myTable.addView(rows[j]);
+        }
+//        setContentView(myTable);
     }
 
     @Override
