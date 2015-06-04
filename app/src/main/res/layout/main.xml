@@ -47,7 +47,7 @@
         android:textColor="#030505"
         android:textSize="30sp"
         android:id="@+id/sharkSplit"
-
+        android:onClick="onClick"
         android:background="@drawable/mybuttonshape"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"

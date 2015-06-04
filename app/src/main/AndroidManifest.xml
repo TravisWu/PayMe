@@ -33,14 +33,8 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.traviswu.payme.SharkSplit" />
+                android:value="com.traviswu.payme.MainActivity" />
         </activity>
-        <activity
-            android:name=".ContinueToSplit"
-            android:label="Spliting Display"
-            android:parentActivityName=".SharkSplit">
-        </activity>
-
 
     </application>
 
