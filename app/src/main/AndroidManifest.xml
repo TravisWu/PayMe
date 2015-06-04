@@ -35,6 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.traviswu.payme.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>
