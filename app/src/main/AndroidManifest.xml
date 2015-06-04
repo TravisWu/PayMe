@@ -36,6 +36,13 @@
                 android:value="com.traviswu.payme.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".BloodyAct"
+            android:label="bloody Hell"
+            android:parentActivityName=".MainActivity" >
+
+        </activity>
+
     </application>
 
 </manifest>
