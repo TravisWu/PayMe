@@ -28,7 +28,7 @@
         </activity>
         <activity
             android:name=".SharkSplit"
-            android:label="@string/title_activity_continue_to_split"
+            android:label="@string/sharkSplit"
             android:parentActivityName=".MainActivity" >
 
             <meta-data
@@ -36,6 +36,10 @@
                 android:value="com.traviswu.payme.MainActivity" />
         </activity>
 
+        <activity android:name=".ContinueToSplit"
+            android:label="@string/continueToSplit"
+            android:parentActivityName=".SharkSplit" >
+        </activity>
     </application>
 
 </manifest>

@@ -5,9 +5,9 @@
     <string name="total_to_split">Enter The Total Amount Of Money You Wish To Be Split: </string>
     <string name="n_people">And How Many People Are Sharing The Burden: </string>
     <string name="split_now">Split Now</string>
-    <string name="title_activity_continue_to_split">ContinueToSplit</string>
     <string name="sharkSplit">Shark Split</string>
     <string name="buttonBlood">Draw Blood</string>
     <string name="even_split">Even Split</string>
     <string name="split_intro">Welcome to Split</string>
+    <string name="continueToSplit">Continue to Split</string>
 </resources>
