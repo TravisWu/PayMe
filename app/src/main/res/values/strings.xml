@@ -10,4 +10,7 @@
     <string name="even_split">Even Split</string>
     <string name="split_intro">Welcome to Split</string>
     <string name="continueToSplit">Continue to Split</string>
+    <string name="title_activity_proceed_to_checkout">ProceedToCheckout</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

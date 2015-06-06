@@ -7,22 +7,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.util.Log;
-
-import org.w3c.dom.Text;
 
 
 public class ContinueToSplit extends ActionBarActivity {
+    final static String SUBTOTAL = "com.traviswu.payme.subtotal";
     double total_amount;
     int n_people;
     int[] shares;
@@ -168,19 +164,9 @@ public class ContinueToSplit extends ActionBarActivity {
         init();
     }
 
-//    public void checkOut(View view){
-//        Intent newIntent = new Intent (ContinueToSplit.class,ProceedToCheckout.class);
-//
-//        int total_share = 0;
-//        for (int i =0; i<n_people; i++){
-//            total_share += shares[i];
-//        }
-//
-//        double money_per_share = total_amount/total_share;
-//        for (int i =0; i<n_people; i++){
-//            subtotal[i] = shares[i]*money_per_share;
-//        }
-//
-//
-//    }
+    public void checkOut(View view) {
+        Intent newIntent = new Intent (ContinueToSplit.this, ProceedToCheckout.class);
+        newIntent.putExtra(SUBTOTAL,subtotal);
+        startActivity(newIntent);
+    }
 }
