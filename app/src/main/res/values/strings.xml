@@ -13,4 +13,5 @@
     <string name="title_activity_proceed_to_checkout">ProceedToCheckout</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_launch_contact">LaunchContact</string>
 </resources>

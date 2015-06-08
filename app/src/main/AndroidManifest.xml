@@ -38,13 +38,11 @@
             android:name=".ContinueToSplit"
             android:label="@string/continueToSplit"
             android:parentActivityName=".SharkSplit" >
-
         </activity>
         <activity
             android:name=".BloodyAct"
             android:label="bloody Hell"
             android:parentActivityName=".MainActivity">
-
         </activity>
         <activity
             android:name=".ProceedToCheckout"
@@ -53,6 +51,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.traviswu.payme.ContinueToSplit" />
+        </activity>
+        <activity
+            android:name=".LaunchContact"
+            android:label="@string/title_activity_launch_contact"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.traviswu.payme.MainActivity" />
         </activity>
     </application>
 
