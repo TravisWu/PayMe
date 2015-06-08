@@ -8,9 +8,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.traviswu.payme.LaunchContact">
 
-    <TextView
+    <EditText
+        android:id="@+id/invite_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/launch_contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:onClick="launchContactPicker"
+        android:text="@string/launch_contacts" />
 
 </RelativeLayout>

@@ -35,4 +35,6 @@ public class LaunchContact extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
