@@ -43,7 +43,7 @@ public class FragmentOne extends Fragment {
         });
 
         Button buttonBlood = (Button) view.findViewById(R.id.buttonBlood);
-        buttonBlood.setOnClickListener( new View.OnClickListener(){
+        buttonBlood.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

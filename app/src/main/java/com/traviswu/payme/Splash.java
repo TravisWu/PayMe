@@ -1,8 +1,8 @@
 package com.traviswu.payme;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 
 /**

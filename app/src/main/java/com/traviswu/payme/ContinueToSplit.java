@@ -5,8 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +15,10 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.util.Log;
-
-import org.w3c.dom.Text;
 
 
 public class ContinueToSplit extends ActionBarActivity {
+    final static String SUBTOTAL = "com.traviswu.payme.subtotal";
     double total_amount;
     int n_people;
     int[] shares;
@@ -36,13 +34,6 @@ public class ContinueToSplit extends ActionBarActivity {
 
         shares = new int [n_people];
         subtotal = new double [n_people];
-        /**
-        TextView newTextView = new TextView(this);
-        newTextView.setTextSize(40);
-        String newMessage = "Total money $"+ total_amount+" between " +n_people+ " people.";
-        newTextView.setText(newMessage);
-        setContentView(newTextView);
-        **/
 
         setContentView(R.layout.continue_to_split);
         init();
@@ -50,7 +41,14 @@ public class ContinueToSplit extends ActionBarActivity {
 
     public void init(){
         TableLayout myTable = (TableLayout)findViewById(R.id.table_of_shares);
+        myTable.removeAllViews();
 
+        TableRow text = new TableRow(this);
+         TextView newTextView = new TextView(this);
+         String newMessage = "Split $"+ total_amount+" between " +n_people+ " people.";
+         newTextView.setText(newMessage);
+         text.addView(newTextView);
+        myTable.addView(text);
 
         TableRow row0 = new TableRow(this);
         TextView tv0 = new TextView(this);
@@ -78,8 +76,8 @@ public class ContinueToSplit extends ActionBarActivity {
             newRow.addView(tvNew1);
 
             final EditText tvNew2 = new EditText(this);
-            tvNew2.setHint("has "+shares[i]+" shares");
-
+            tvNew2.setHint(shares[i]+"");
+            tvNew2.setInputType(InputType.TYPE_CLASS_NUMBER);
             final int index = i;
             tvNew2.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -104,19 +102,28 @@ public class ContinueToSplit extends ActionBarActivity {
                     for (int l=0; l <shares.length; l++){
                         subtotal[l] = shares[l] * new_share_per_slice;
                     }
+
+                    init();
                 }
             });
             newRow.addView(tvNew2);
 
             TextView tvNew3 = new TextView(this);
-            tvNew3.setText("Comes up to $"+subtotal[i]);
+            tvNew3.setText("$"+subtotal[i]);
             newRow.addView(tvNew3);
 
             myTable.addView(newRow);
         }
         TableRow row2 = new TableRow(this);
-        //Button even_split = new Button();
-
+        final Button even_split = new Button(this);
+        even_split.setText("Even Split");
+        even_split.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                evenSplit(v);
+            }
+        });
+        myTable.addView(even_split, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
     }
 
@@ -147,6 +154,7 @@ public class ContinueToSplit extends ActionBarActivity {
     //It can serve as a mid-point where users to choose to go to different variations from there
 
     public void evenSplit(View view){
+
         total_share = n_people;
         double shares = total_amount/n_people;
         for (int i=0; i<n_people; i++){
@@ -156,19 +164,9 @@ public class ContinueToSplit extends ActionBarActivity {
         init();
     }
 
-//    public void checkOut(View view){
-//        Intent newIntent = new Intent (ContinueToSplit.class,ProceedToCheckout.class);
-//
-//        int total_share = 0;
-//        for (int i =0; i<n_people; i++){
-//            total_share += shares[i];
-//        }
-//
-//        double money_per_share = total_amount/total_share;
-//        for (int i =0; i<n_people; i++){
-//            subtotal[i] = shares[i]*money_per_share;
-//        }
-//
-//
-//    }
+    public void checkOut(View view) {
+        Intent newIntent = new Intent (ContinueToSplit.this, ProceedToCheckout.class);
+        newIntent.putExtra(SUBTOTAL,subtotal);
+        startActivity(newIntent);
+    }
 }
