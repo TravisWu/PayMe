@@ -11,11 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 
 public class LaunchContact extends ActionBarActivity {
 
     private static final int CONTACT_PICKER_RESULT = 1001;
     private static final String DEBUG_TAG = "From LaunchContact";
+    ArrayList<String> info = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,8 @@ public class LaunchContact extends ActionBarActivity {
                                 number = people.getString(indexNum);
 
                                 //handle data input
+                                info.add(name);
+                                info.add(number);
                             } while (people.moveToNext());
                         } else {
                             Log.w(DEBUG_TAG, "No results");
@@ -91,6 +97,8 @@ public class LaunchContact extends ActionBarActivity {
                             people.close();
 
                         //handle display if any
+                        //could start by display a table of all ppl and their number
+                        displayTable();
                     }
                     break;
             }
@@ -98,5 +106,9 @@ public class LaunchContact extends ActionBarActivity {
             //wait to handle failure
             Log.w(DEBUG_TAG, "Warning: activity result not ok");
         }
+    }
+
+    private void displayTable() {
+
     }
 }
