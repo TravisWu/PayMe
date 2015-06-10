@@ -11,14 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
 
 
 public class LaunchContact extends ActionBarActivity {
 
     private static final int CONTACT_PICKER_RESULT = 1001;
     private static final String DEBUG_TAG = "From LaunchContact";
+    ArrayList<String> info = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,35 +59,56 @@ public class LaunchContact extends ActionBarActivity {
             switch (requestCode) {
                 case CONTACT_PICKER_RESULT:
                     //handle contact result
-                    Bundle extras = data.getExtras();
-                    Set keys = extras.keySet();
-                    Iterator<String> iter = keys.iterator();
-                    while (iter.hasNext()) {
-                        String key = iter.next();
-                        Log.v(DEBUG_TAG, key + "[" + extras.get(key) + "]");
+                    Cursor people = null;
+                    String name;
+                    String number;
+                    try {
+                        Uri result = data.getData();
+                        Log.v(DEBUG_TAG, "got result: " + result.toString());
+
+                        //grab the id from URI
+                        String id = result.getLastPathSegment();
+                        Uri newUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+                        String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
+                        people = getContentResolver().query(newUri, projection, null, null, null);
+
+
+                        int indexName = people.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                        int indexNum = people.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+
+
+                        if (people.moveToFirst()) {
+                            do {
+                                name = people.getString(indexName);
+                                number = people.getString(indexNum);
+
+                                //handle data input
+                                info.add(name);
+                                info.add(number);
+                            } while (people.moveToNext());
+                        } else {
+                            Log.w(DEBUG_TAG, "No results");
+                        }
+
+                    } catch (Exception e) {
+                        Log.e(DEBUG_TAG, "Failed to retrieve contact", e);
+                    } finally {
+                        if (people != null)
+                            people.close();
+
+                        //handle display if any
+                        //could start by display a table of all ppl and their number
+                        displayTable();
                     }
-                    Uri result = data.getData();
-                    Log.v(DEBUG_TAG, "got result: " + result.toString());
-
-                    //grab the id from URI
-                    String id = result.getLastPathSegment();
-
-                    Uri newUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-                    String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
-                    Cursor people = getContentResolver().query(newUri, projection, null, null, null);
-
-                    int indexName = people.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-                    int indexNum = people.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-
-                    people.moveToFirst();
-                    String[] columns = people.getColumnNames();
-
                     break;
-
             }
         } else {
             //wait to handle failure
             Log.w(DEBUG_TAG, "Warning: activity result not ok");
         }
+    }
+
+    private void displayTable() {
+
     }
 }
