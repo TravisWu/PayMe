@@ -1,17 +1,27 @@
 package com.traviswu.payme;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TableLayout;
+
+import java.util.ArrayList;
 
 
 public class SharkSplit extends ActionBarActivity {
     public static final String TOTAL_AMOUNT = "com.traviswu.payme.total_amount";
     public static final String N_PEOPLE ="com.traviswu.payme.n_shares";
+
+    private static final int CONTACT_PICKER_RESULT = 1001;
+    private static final String DEBUG_TAG = "From LaunchContact";
+    ArrayList<String> info = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +51,7 @@ public class SharkSplit extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
     public void continueToSplit(View view){
         Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
@@ -50,5 +61,73 @@ public class SharkSplit extends ActionBarActivity {
         newIntent.putExtra(N_PEOPLE, Integer.parseInt(nPeople.getText().toString()));
         startActivity(newIntent);
     }
+     **/
+    public void launchContactPicker(View view) {
+        Intent contactIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        contactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        startActivityForResult(contactIntent, CONTACT_PICKER_RESULT);
+    }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CONTACT_PICKER_RESULT:
+                    //handle contact result
+                    Cursor people = null;
+                    String name;
+                    String number;
+                    try {
+                        Uri result = data.getData();
+                        Log.v(DEBUG_TAG, "got result: " + result.toString());
+
+                        //grab the id from URI
+                        //String id = result.getLastPathSegment();
+                        Uri newUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+                        String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
+                        people = getContentResolver().query(newUri, projection, null, null, null);
+
+
+                        int indexName = people.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                        int indexNum = people.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+
+
+                        if (people.moveToFirst()) {
+                            do {
+                                name = people.getString(indexName);
+                                number = people.getString(indexNum);
+
+                                //handle data input
+                                info.add(name);
+                                info.add(number);
+                            } while (people.moveToNext());
+                        } else {
+                            Log.w(DEBUG_TAG, "No results");
+                        }
+
+                    } catch (Exception e) {
+                        Log.e(DEBUG_TAG, "Failed to retrieve contact", e);
+                    } finally {
+                        if (people != null)
+                            people.close();
+
+                        //handle display if any
+                        //could start by display a table of all ppl and their number
+                        displayTable();
+                    }
+                    break;
+            }
+        } else {
+            //wait to handle failure
+            Log.w(DEBUG_TAG, "Warning: activity result not ok");
+        }
+    }
+
+    private void displayTable() {
+        TableLayout myTable = (TableLayout) findViewById(R.id.people_list);
+        myTable.removeAllViews();
+
+
+    }
 }
+
+
