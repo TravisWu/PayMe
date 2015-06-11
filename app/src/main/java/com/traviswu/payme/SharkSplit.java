@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -126,7 +128,22 @@ public class SharkSplit extends ActionBarActivity {
         TableLayout myTable = (TableLayout) findViewById(R.id.people_list);
         myTable.removeAllViews();
 
+        String[] infoArray = new String[info.size()];
+        info.toArray(infoArray);
 
+        for (int i = 0; i < infoArray.length; i += 2) {
+            TableRow newRow = new TableRow(this);
+
+            TextView tvNew1 = new TextView(this);
+            tvNew1.setText(infoArray[i]);
+            newRow.addView(tvNew1);
+
+            TextView tvNew2 = new TextView(this);
+            tvNew1.setText(infoArray[i + 1]);
+            newRow.addView(tvNew2);
+
+            myTable.addView(newRow);
+        }
     }
 }
 
