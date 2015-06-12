@@ -24,14 +24,23 @@ public class ContinueToSplit extends ActionBarActivity {
     int[] shares;
     double[] subtotal;
     int total_share = 0;
+    String[] infoArray;
+    String[] names;
+    String[] phone_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent newIntent = getIntent();
         total_amount = newIntent.getDoubleExtra(SharkSplit.TOTAL_AMOUNT, 0.0);
-        n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
+        infoArray = newIntent.getStringArrayExtra(SharkSplit.CONTACT_LIST);
+        n_people = infoArray.length / 2;
+        //n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
 
+        for (int i = 0; i < n_people; i += 2) {
+            names[i / 2] = infoArray[i];
+            phone_number[i / 2] = infoArray[i + 1];
+        }
         shares = new int [n_people];
         subtotal = new double [n_people];
 
@@ -44,10 +53,10 @@ public class ContinueToSplit extends ActionBarActivity {
         myTable.removeAllViews();
 
         TableRow text = new TableRow(this);
-         TextView newTextView = new TextView(this);
-         String newMessage = "Split $"+ total_amount+" between " +n_people+ " people.";
-         newTextView.setText(newMessage);
-         text.addView(newTextView);
+        TextView newTextView = new TextView(this);
+        String newMessage = "Split $" + total_amount + " between " + n_people + " people.";
+        newTextView.setText(newMessage);
+        text.addView(newTextView);
         myTable.addView(text);
 
         TableRow row0 = new TableRow(this);
@@ -72,7 +81,7 @@ public class ContinueToSplit extends ActionBarActivity {
         for(int i =0; i<shares.length; i++){
             TableRow newRow = new TableRow(this);
             TextView tvNew1 = new TextView(this);
-            tvNew1.setText("Person " + i);
+            tvNew1.setText(names[i]);
             newRow.addView(tvNew1);
 
             final EditText tvNew2 = new EditText(this);
@@ -82,7 +91,6 @@ public class ContinueToSplit extends ActionBarActivity {
             tvNew2.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 
                 }
 
@@ -166,6 +174,7 @@ public class ContinueToSplit extends ActionBarActivity {
 
     public void checkOut(View view) {
         Intent newIntent = new Intent (ContinueToSplit.this, ProceedToCheckout.class);
+        newIntent.putExtra(SharkSplit.CONTACT_LIST, phone_number);
         newIntent.putExtra(SUBTOTAL,subtotal);
         startActivity(newIntent);
     }

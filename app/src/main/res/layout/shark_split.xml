@@ -15,15 +15,16 @@
         android:layout_marginTop="29dp"
         android:hint="@string/total_to_split"
         android:inputType="numberSigned" />
-    <EditText android:id="@+id/n_people"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/amount_to_split"
-        android:layout_marginTop="33dp"
-        android:hint="@string/n_people"
-        android:inputType="numberSigned" />
+
+    <!--<EditText android:id="@+id/n_people"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_below="@+id/amount_to_split"-->
+    <!--android:layout_marginTop="33dp"-->
+    <!--android:hint="@string/n_people"-->
+    <!--android:inputType="numberSigned" />-->
 
     <TableLayout
         android:id="@+id/people_list"

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 
 public class SharkSplit extends ActionBarActivity {
     public static final String TOTAL_AMOUNT = "com.traviswu.payme.total_amount";
-    public static final String N_PEOPLE ="com.traviswu.payme.n_shares";
+    //public static final String N_PEOPLE ="com.traviswu.payme.n_shares";
+    public static final String CONTACT_LIST = "com.traviswu.payme.contact_list";
 
     private static final int CONTACT_PICKER_RESULT = 1001;
     private static final String DEBUG_TAG = "From LaunchContact";
@@ -53,17 +55,18 @@ public class SharkSplit extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
     public void continueToSplit(View view){
         Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
-        EditText nPeople = (EditText) findViewById(R.id.n_people);
+        //EditText nPeople = (EditText) findViewById(R.id.n_people);
+        String[] infoArray = info.toArray(new String[info.size() / 2]);
 
         newIntent.putExtra(TOTAL_AMOUNT, Double.parseDouble(totalAmount.getText().toString()));
-        newIntent.putExtra(N_PEOPLE, Integer.parseInt(nPeople.getText().toString()));
+        //newIntent.putExtra(N_PEOPLE, Integer.parseInt(nPeople.getText().toString()));
+        newIntent.putExtra(CONTACT_LIST, infoArray);
         startActivity(newIntent);
     }
-     **/
+
     public void launchContactPicker(View view) {
         Intent contactIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         contactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
@@ -139,7 +142,7 @@ public class SharkSplit extends ActionBarActivity {
             newRow.addView(tvNew1);
 
             TextView tvNew2 = new TextView(this);
-            tvNew1.setText(infoArray[i + 1]);
+            tvNew2.setText(infoArray[i + 1]);
             newRow.addView(tvNew2);
 
             myTable.addView(newRow);
