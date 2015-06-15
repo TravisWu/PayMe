@@ -26,6 +26,7 @@ public class SharkSplit extends ActionBarActivity {
     private static final int CONTACT_PICKER_RESULT = 1001;
     private static final String DEBUG_TAG = "From LaunchContact";
     ArrayList<String> info = new ArrayList<String>();
+    ArrayList<String> fini = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,14 @@ public class SharkSplit extends ActionBarActivity {
         Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
         //EditText nPeople = (EditText) findViewById(R.id.n_people);
-        String[] infoArray = info.toArray(new String[info.size() / 2]);
+        String[] finiArray = fini.toArray(new String[fini.size()]);
 
-        newIntent.putExtra(TOTAL_AMOUNT, Double.parseDouble(totalAmount.getText().toString()));
+        if (!totalAmount.getText().toString().equals("")) //guard
+            newIntent.putExtra(TOTAL_AMOUNT, Double.parseDouble(totalAmount.getText().toString()));
+        else
+            newIntent.putExtra(TOTAL_AMOUNT, 0);
         //newIntent.putExtra(N_PEOPLE, Integer.parseInt(nPeople.getText().toString()));
-        newIntent.putExtra(CONTACT_LIST, infoArray);
+        newIntent.putExtra(CONTACT_LIST, finiArray);
         startActivity(newIntent);
     }
 
@@ -98,13 +102,17 @@ public class SharkSplit extends ActionBarActivity {
 
                         if (people.moveToFirst()) {
                             do {
+                                //while (!people.isAfterLast()){
                                 name = people.getString(indexName);
                                 number = people.getString(indexNum);
 
                                 //handle data input
-                                info.add(name);
-                                info.add(number);
+                                if (!info.contains(name)) {
+                                    info.add(name);
+                                    info.add(number);
+                                }
                             } while (people.moveToNext());
+                            //}
                         } else {
                             Log.w(DEBUG_TAG, "No results");
                         }
@@ -135,16 +143,26 @@ public class SharkSplit extends ActionBarActivity {
         info.toArray(infoArray);
 
         for (int i = 0; i < infoArray.length; i += 2) {
-            TableRow newRow = new TableRow(this);
+            final TableRow newRow = new TableRow(this);
 
             TextView tvNew1 = new TextView(this);
             tvNew1.setText(infoArray[i]);
+            tvNew1.setId(R.id.RowText1);
             newRow.addView(tvNew1);
 
             TextView tvNew2 = new TextView(this);
             tvNew2.setText(infoArray[i + 1]);
+            tvNew1.setId(R.id.RowText2);
             newRow.addView(tvNew2);
 
+            newRow.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    TextView name = (TextView) newRow.findViewById(R.id.RowText1);
+                    //TextView phone_num = (TextView)newRow.getChildAt(2);
+                    fini.add(name.getText().toString());
+                    //fini.add(phone_num.getText().toString());
+                }
+            });
             myTable.addView(newRow);
         }
     }
