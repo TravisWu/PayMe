@@ -60,6 +60,7 @@ public class SharkSplit extends ActionBarActivity {
         Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
         //EditText nPeople = (EditText) findViewById(R.id.n_people);
+        Log.d(DEBUG_TAG, "size of " + fini.size());
         String[] finiArray = fini.toArray(new String[fini.size()]);
 
         if (!totalAmount.getText().toString().equals("")) //guard
@@ -157,10 +158,17 @@ public class SharkSplit extends ActionBarActivity {
 
             newRow.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    TextView name = (TextView) newRow.findViewById(R.id.RowText1);
+                    TextView name = (TextView) newRow.getChildAt(0);
+                    //name.setText("clicked");
+
+                    TextView phone = (TextView) newRow.getChildAt(1);
+                    //phone.setText("num here!!");
                     //TextView phone_num = (TextView)newRow.getChildAt(2);
-                    fini.add(name.getText().toString());
-                    //fini.add(phone_num.getText().toString());
+                    if (!fini.contains(name.getText().toString())) {
+                        fini.add(name.getText().toString());
+                        fini.add(phone.getText().toString());
+
+                    }
                 }
             });
             myTable.addView(newRow);
