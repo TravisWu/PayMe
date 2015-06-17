@@ -35,7 +35,7 @@ public class ContinueToSplit extends ActionBarActivity {
         Intent newIntent = getIntent();
         total_amount = newIntent.getDoubleExtra(SharkSplit.TOTAL_AMOUNT, 0.0);
         infoArray = newIntent.getStringArrayExtra(SharkSplit.CONTACT_LIST);
-        n_people = infoArray.length / 2;
+        n_people = infoArray.length / 2 + 1;
         //n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
         Log.d("Debug Tag", "size of array " + infoArray.length);
         names = new String[n_people];

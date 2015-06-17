@@ -142,7 +142,7 @@ public class SharkSplit extends ActionBarActivity {
     }
 
     private void displayTable() {
-        final PopupWindow choose = new PopupWindow(this);
+        final PopupWindow choose = new PopupWindow();
         TableLayout myTable = new TableLayout(this);
         RelativeLayout main = (RelativeLayout) findViewById(R.id.shark_split_main);
         myTable.removeAllViews();
@@ -157,8 +157,9 @@ public class SharkSplit extends ActionBarActivity {
         });
 
         choose.showAtLocation(main, Gravity.BOTTOM, 10, 10);
-        choose.update();
+        choose.update(50, 50, 300, 80);
         choose.setContentView(myTable);
+
 
         String[] infoArray = new String[info.size()];
         info.toArray(infoArray);
@@ -194,7 +195,10 @@ public class SharkSplit extends ActionBarActivity {
             myTable.addView(newRow);
         }
         myTable.addView(dismiss);
+        myTable.setBackgroundColor(0x00000000); //change pop up color
         choose.setContentView(myTable);
+        main.addView(myTable);
+        setContentView(main);
     }
 }
 
