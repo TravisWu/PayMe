@@ -126,7 +126,8 @@ public class SharkSplit extends ActionBarActivity {
 
                         //handle display if any
                         //could start by display a table of all ppl and their number
-                        displayTable();
+
+                        //displayTable();
                     }
                     break;
             }
