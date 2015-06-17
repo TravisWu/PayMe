@@ -200,6 +200,6 @@ public class SharkSplit extends ActionBarActivity {
         main.addView(myTable);
         setContentView(main);
     }
-}
+} 
 
 
