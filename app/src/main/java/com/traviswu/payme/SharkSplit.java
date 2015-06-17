@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -127,7 +131,7 @@ public class SharkSplit extends ActionBarActivity {
                         //handle display if any
                         //could start by display a table of all ppl and their number
 
-                        //displayTable();
+                        displayTable();
                     }
                     break;
             }
@@ -138,8 +142,23 @@ public class SharkSplit extends ActionBarActivity {
     }
 
     private void displayTable() {
-        TableLayout myTable = (TableLayout) findViewById(R.id.people_list);
+        final PopupWindow choose = new PopupWindow(this);
+        TableLayout myTable = new TableLayout(this);
+        RelativeLayout main = (RelativeLayout) findViewById(R.id.shark_split_main);
         myTable.removeAllViews();
+
+        Button dismiss = new Button(this);
+        dismiss.setText("Done");
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choose.dismiss();
+            }
+        });
+
+        choose.showAtLocation(main, Gravity.BOTTOM, 10, 10);
+        choose.update();
+        choose.setContentView(myTable);
 
         String[] infoArray = new String[info.size()];
         info.toArray(infoArray);
@@ -174,6 +193,8 @@ public class SharkSplit extends ActionBarActivity {
             });
             myTable.addView(newRow);
         }
+        myTable.addView(dismiss);
+        choose.setContentView(myTable);
     }
 }
 
