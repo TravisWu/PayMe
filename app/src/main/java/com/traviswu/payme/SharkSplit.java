@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -26,6 +30,7 @@ public class SharkSplit extends ActionBarActivity {
     private static final int CONTACT_PICKER_RESULT = 1001;
     private static final String DEBUG_TAG = "From LaunchContact";
     ArrayList<String> info = new ArrayList<String>();
+    ArrayList<String> fini = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +64,15 @@ public class SharkSplit extends ActionBarActivity {
         Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
         //EditText nPeople = (EditText) findViewById(R.id.n_people);
-        String[] infoArray = info.toArray(new String[info.size() / 2]);
+        Log.d(DEBUG_TAG, "size of " + fini.size());
+        String[] finiArray = fini.toArray(new String[fini.size()]);
 
-        newIntent.putExtra(TOTAL_AMOUNT, Double.parseDouble(totalAmount.getText().toString()));
+        if (!totalAmount.getText().toString().equals("")) //guard
+            newIntent.putExtra(TOTAL_AMOUNT, Double.parseDouble(totalAmount.getText().toString()));
+        else
+            newIntent.putExtra(TOTAL_AMOUNT, 0);
         //newIntent.putExtra(N_PEOPLE, Integer.parseInt(nPeople.getText().toString()));
-        newIntent.putExtra(CONTACT_LIST, infoArray);
+        newIntent.putExtra(CONTACT_LIST, finiArray);
         startActivity(newIntent);
     }
 
@@ -98,13 +107,17 @@ public class SharkSplit extends ActionBarActivity {
 
                         if (people.moveToFirst()) {
                             do {
+                                //while (!people.isAfterLast()){
                                 name = people.getString(indexName);
                                 number = people.getString(indexNum);
 
                                 //handle data input
-                                info.add(name);
-                                info.add(number);
+                                if (!info.contains(name)) {
+                                    info.add(name);
+                                    info.add(number);
+                                }
                             } while (people.moveToNext());
+                            //}
                         } else {
                             Log.w(DEBUG_TAG, "No results");
                         }
@@ -117,6 +130,7 @@ public class SharkSplit extends ActionBarActivity {
 
                         //handle display if any
                         //could start by display a table of all ppl and their number
+
                         displayTable();
                     }
                     break;
@@ -128,25 +142,59 @@ public class SharkSplit extends ActionBarActivity {
     }
 
     private void displayTable() {
-        TableLayout myTable = (TableLayout) findViewById(R.id.people_list);
+        final PopupWindow choose = new PopupWindow(this);
+        TableLayout myTable = new TableLayout(this);
+        RelativeLayout main = (RelativeLayout) findViewById(R.id.shark_split_main);
         myTable.removeAllViews();
+
+        Button dismiss = new Button(this);
+        dismiss.setText("Done");
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choose.dismiss();
+            }
+        });
+
+        choose.showAtLocation(main, Gravity.BOTTOM, 10, 10);
+        choose.update();
+        choose.setContentView(myTable);
 
         String[] infoArray = new String[info.size()];
         info.toArray(infoArray);
 
         for (int i = 0; i < infoArray.length; i += 2) {
-            TableRow newRow = new TableRow(this);
+            final TableRow newRow = new TableRow(this);
 
             TextView tvNew1 = new TextView(this);
             tvNew1.setText(infoArray[i]);
+            tvNew1.setId(R.id.RowText1);
             newRow.addView(tvNew1);
 
             TextView tvNew2 = new TextView(this);
             tvNew2.setText(infoArray[i + 1]);
+            tvNew1.setId(R.id.RowText2);
             newRow.addView(tvNew2);
 
+            newRow.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    TextView name = (TextView) newRow.getChildAt(0);
+                    //name.setText("clicked");
+
+                    TextView phone = (TextView) newRow.getChildAt(1);
+                    //phone.setText("num here!!");
+                    //TextView phone_num = (TextView)newRow.getChildAt(2);
+                    if (!fini.contains(name.getText().toString())) {
+                        fini.add(name.getText().toString());
+                        fini.add(phone.getText().toString());
+
+                    }
+                }
+            });
             myTable.addView(newRow);
         }
+        myTable.addView(dismiss);
+        choose.setContentView(myTable);
     }
 } 
 

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,10 +37,15 @@ public class ContinueToSplit extends ActionBarActivity {
         infoArray = newIntent.getStringArrayExtra(SharkSplit.CONTACT_LIST);
         n_people = infoArray.length / 2;
         //n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
+        Log.d("Debug Tag", "size of array " + infoArray.length);
+        names = new String[n_people];
+        phone_number = new String[n_people];
 
-        for (int i = 0; i < n_people; i += 2) {
+        for (int i = 0; i < infoArray.length; i += 2) {  //note here infoArray is 2x n_people
             names[i / 2] = infoArray[i];
+            Log.d("Name Check", names[i / 2]);
             phone_number[i / 2] = infoArray[i + 1];
+            Log.d("Phone Check", phone_number[i / 2]);
         }
         shares = new int [n_people];
         subtotal = new double [n_people];
