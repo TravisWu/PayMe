@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -24,20 +26,54 @@ import java.util.ArrayList;
 
 public class SharkSplit extends ActionBarActivity {
     public static final String TOTAL_AMOUNT = "com.traviswu.payme.total_amount";
-    //public static final String N_PEOPLE ="com.traviswu.payme.n_shares";
     public static final String CONTACT_LIST = "com.traviswu.payme.contact_list";
 
     private static final int CONTACT_PICKER_RESULT = 1001;
-    private static final String DEBUG_TAG = "From LaunchContact";
+    private static String DEBUG_TAG = "From LaunchContact";
     ArrayList<String> info = new ArrayList<String>();
     ArrayList<String> fini = new ArrayList<String>();
+    private Button split_button;
+    private EditText dollar_amount;
+
+    //initialize upon creation of the class
+    public SharkSplit() {
+        DEBUG_TAG = getClass().getName();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shark_split);
+
+        init();
     }
 
+    public void init() {
+        split_button = (Button) findViewById(R.id.split_button);
+        split_button.setEnabled(false);  //disable continue to split button at first
+
+        dollar_amount = (EditText) findViewById(R.id.amount_to_split);
+        dollar_amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if ((dollar_amount.getText().length() != 0) && (Float.parseFloat(dollar_amount.getText().toString()) > 0))
+                    split_button.setEnabled(true);
+                else
+                    split_button.setEnabled(false);
+            }
+        });  //enable continue to split button after it can be proven that a number > 0 has been entered.
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,7 +99,7 @@ public class SharkSplit extends ActionBarActivity {
     public void continueToSplit(View view){
         Intent newIntent = new Intent (SharkSplit.this, ContinueToSplit.class);
         EditText totalAmount = (EditText) findViewById(R.id.amount_to_split);
-        //EditText nPeople = (EditText) findViewById(R.id.n_people);
+
         Log.d(DEBUG_TAG, "size of " + fini.size());
         String[] finiArray = fini.toArray(new String[fini.size()]);
 
@@ -200,6 +236,7 @@ public class SharkSplit extends ActionBarActivity {
         main.addView(myTable);
         setContentView(main);
     }
-} 
+}
+
 
 
