@@ -14,7 +14,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="email_address">Email Address</string>
-    <string name="launch_contacts">Browse Contacts</string>
+    <string name="contact_name">Name</string>
+    <string name="contact_phone">Phone Number</string>
+    <string name="contact_add">+</string>
     <string name="title_activity_launch_contact">LaunchContact</string>
 
     <item name="RowText1" type="id" />
