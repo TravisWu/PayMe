@@ -7,10 +7,10 @@
     <string name="split_now">Split Now</string>
     <string name="sharkSplit">Shark Split</string>
     <string name="buttonBlood">Draw Blood</string>
-    <string name="even_split">Even Split</string>
     <string name="split_intro">Welcome to Split</string>
     <string name="continueToSplit">Continue to Split</string>
     <string name="title_activity_proceed_to_checkout">ProceedToCheckout</string>
+    <string name="proceed_to_checkout">Proceed To Checkout</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="email_address">Email Address</string>
@@ -18,6 +18,7 @@
     <string name="contact_phone">Phone Number</string>
     <string name="contact_add">+</string>
     <string name="title_activity_launch_contact">LaunchContact</string>
+    <string name="even_split">Even Split between Contributors</string>
 
     <item name="RowText1" type="id" />
     <item name="RowText2" type="id" />

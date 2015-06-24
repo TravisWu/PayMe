@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="launchContactPicker"
-                android:text="@string/contact_add"></Button>
+                android:text="@string/contact_add" />
         </TableRow>
     </TableLayout>
 

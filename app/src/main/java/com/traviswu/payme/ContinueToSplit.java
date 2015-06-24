@@ -7,11 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -20,11 +18,13 @@ import android.widget.TextView;
 
 public class ContinueToSplit extends ActionBarActivity {
     final static String SUBTOTAL = "com.traviswu.payme.subtotal";
+
     double total_amount;
     int n_people;
+    int total_share = 0;
+
     int[] shares;
     double[] subtotal;
-    int total_share = 0;
     String[] infoArray;
     String[] names;
     String[] phone_number;
@@ -32,25 +32,30 @@ public class ContinueToSplit extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.continue_to_split);
         Intent newIntent = getIntent();
         total_amount = newIntent.getDoubleExtra(SharkSplit.TOTAL_AMOUNT, 0.0);
         infoArray = newIntent.getStringArrayExtra(SharkSplit.CONTACT_LIST);
         n_people = infoArray.length / 2 + 1;
-        //n_people = newIntent.getIntExtra(SharkSplit.N_PEOPLE, 1);
-        Log.d("Debug Tag", "size of array " + infoArray.length);
+
         names = new String[n_people];
         phone_number = new String[n_people];
 
         for (int i = 0; i < infoArray.length; i += 2) {  //note here infoArray is 2x n_people
             names[i / 2] = infoArray[i];
-            Log.d("Name Check", names[i / 2]);
+            // Log.d("Name Check", names[i / 2]);
             phone_number[i / 2] = infoArray[i + 1];
-            Log.d("Phone Check", phone_number[i / 2]);
+            // Log.d("Phone Check", phone_number[i / 2]);
         }
+        names[n_people - 1] = "me";
+        phone_number[n_people - 1] = "";
+
         shares = new int [n_people];
         subtotal = new double [n_people];
 
-        setContentView(R.layout.continue_to_split);
+        TextView message = (TextView) findViewById(R.id.split_message);
+        message.setText("Splitting $" + total_amount + " between " + n_people + " people.");
+
         init();
     }
 
@@ -58,33 +63,26 @@ public class ContinueToSplit extends ActionBarActivity {
         TableLayout myTable = (TableLayout)findViewById(R.id.table_of_shares);
         myTable.removeAllViews();
 
-        TableRow text = new TableRow(this);
-        TextView newTextView = new TextView(this);
-        String newMessage = "Split $" + total_amount + " between " + n_people + " people.";
-        newTextView.setText(newMessage);
-        text.addView(newTextView);
-        myTable.addView(text);
-
         TableRow row0 = new TableRow(this);
         TextView tv0 = new TextView(this);
-        tv0.setText("Split");
-        tv0.setTextColor(Color.GREEN);
+        tv0.setText("Contributors");
+        tv0.setTextColor(Color.BLUE);
         row0.addView(tv0);
 
         TextView tv1 = new TextView(this);
         tv1.setText("Shares");
-        tv1.setTextColor(Color.GREEN);
+        tv1.setTextColor(Color.BLUE);
         row0.addView(tv1);
 
         TextView tv2 = new TextView(this);
         tv2.setText("Subtotal");
-        tv2.setTextColor(Color.GREEN);
+        tv2.setTextColor(Color.BLUE);
         row0.addView(tv2);
 
         //Log.d("shares", shares.length+"");
         myTable.addView(row0);
 
-        for(int i =0; i<shares.length; i++){
+        for (int i = 0; i < names.length; i++) {
             TableRow newRow = new TableRow(this);
             TextView tvNew1 = new TextView(this);
             tvNew1.setText(names[i]);
@@ -128,16 +126,6 @@ public class ContinueToSplit extends ActionBarActivity {
 
             myTable.addView(newRow);
         }
-        TableRow row2 = new TableRow(this);
-        final Button even_split = new Button(this);
-        even_split.setText("Even Split");
-        even_split.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                evenSplit(v);
-            }
-        });
-        myTable.addView(even_split, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
     }
 
